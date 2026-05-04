@@ -1,0 +1,13 @@
+{% extends "DevQA/base.html" %}
+{% block content %}
+<h1>DevPulse</h1>
+<p>Welcome to DevPulse</p>
+{% for post in discussion_thread %}
+{% if not post.isPrivate %}
+<h2>{{ post.title }}</h2>
+<p>Posted by {{ post.author }}</p>
+<p>{{ post.content }}</p>
+<p>{{ post.date_posted }}</p>
+{% endif %}
+{% endfor %}
+{% endblock content%}
