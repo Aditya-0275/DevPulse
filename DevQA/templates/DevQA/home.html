@@ -1,13 +1,17 @@
 {% extends "DevQA/base.html" %}
 {% block content %}
-<h1>DevPulse</h1>
-<p>Welcome to DevPulse</p>
 {% for post in discussion_thread %}
 {% if not post.isPrivate %}
-<h2>{{ post.title }}</h2>
-<p>Posted by {{ post.author }}</p>
-<p>{{ post.content }}</p>
-<p>{{ post.date_posted }}</p>
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ post.author }}</a>
+            <small class="text-muted">{{ post.date_posted }}</small>
+        </div>
+        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>
 {% endif %}
 {% endfor %}
 {% endblock content%}
