@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-discussion_thread = [
+pulse = [
     {
         'author': 'Aditya Sharma',
         'title': 'First Post for DevPulse',
@@ -27,7 +27,7 @@ discussion_thread = [
 
 def home(request):
     context = {
-        'discussion_thread': discussion_thread
+        'pulses': pulse
     }
     return render(request, 'DevQA/home.html', context=context)
 
