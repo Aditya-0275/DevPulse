@@ -5,8 +5,8 @@
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ pulse.author }}</a>
-            <small class="text-muted">{{ pulse.date_posted }}</small>
+            <a class="mr-2" href="#">{{ pulse.user.username }}</a>
+            <small class="text-muted">{{ pulse.created_at|date:"F d, Y" }}</small>
         </div>
         <h2><a class="article-title" href="#">{{ pulse.title }}</a></h2>
         <p class="article-content">{{ pulse.content }}</p>
