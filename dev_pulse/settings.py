@@ -123,3 +123,5 @@ STATIC_URL = 'static/'
 # Custom User Model
 AUTH_USER_MODEL = 'DevQA.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+LOGIN_REDIRECT_URL = 'devpulse-home'
+LOGOUT_REDIRECT_URL = 'devpulse-home'
