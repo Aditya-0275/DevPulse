@@ -2,10 +2,11 @@
 {% block content %}
 {% for pulse in pulses %}
 {% if not pulse.isPrivate %}
-<article class="media content-section">
-    <div class="media-body">
+<article class="d-flex content-section">
+    <img class="rounded-circle article-img" src="{{ pulse.user.profile.image.url }}">
+    <div>
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ pulse.user.username }}</a>
+            <a class="me-2" href="#">{{ pulse.user.username }}</a>
             <small class="text-muted">{{ pulse.created_at|date:"F d, Y" }}</small>
         </div>
         <h2><a class="article-title" href="#">{{ pulse.title }}</a></h2>

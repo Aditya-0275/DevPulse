@@ -6,6 +6,7 @@
         <div>
             <h2 class="account-heading">{{ user.username }}</h2>
             <p class="text-secondary">{{ user.email }}</p>
+            <a class="btn btn-secondary" href="{% url 'profile_update' %}">Edit Profile</a>
         </div>
     </div>
 </div>
