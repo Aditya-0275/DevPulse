@@ -1,7 +1,6 @@
 {% extends "DevQA/base.html" %}
 {% block content %}
 {% for pulse in pulses %}
-{% if not pulse.isPrivate %}
 <article class="d-flex content-section">
     <img class="rounded-circle article-img" src="{{ pulse.user.profile.image.url }}">
     <div>
@@ -9,10 +8,9 @@
             <a class="me-2" href="#">{{ pulse.user.username }}</a>
             <small class="text-muted">{{ pulse.created_at|date:"F d, Y" }}</small>
         </div>
-        <h2><a class="article-title" href="#">{{ pulse.title }}</a></h2>
+        <h2><a class="article-title" href="{% url 'devpulse-detail' pulse.id %}">{{ pulse.title }}</a></h2>
         <p class="article-content">{{ pulse.content }}</p>
     </div>
 </article>
-{% endif %}
 {% endfor %}
 {% endblock content%}

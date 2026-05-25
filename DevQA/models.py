@@ -40,6 +40,7 @@ class Pulse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pulses')
     title = models.CharField(max_length=300)
     content = models.TextField()
+    isPrivate = models.BooleanField(default=False)
     views = models.PositiveIntegerField(default=0)
     tags = models.ManyToManyField(Tag, through='PulseTag', related_name='pulses')
     created_at = models.DateTimeField(default=timezone.now)
