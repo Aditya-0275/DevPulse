@@ -5,11 +5,13 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Delete Pulse</legend>
-            <p>Are you sure you want to delete the post <strong>"{{ pulse.title }}"</strong>?</p>
+            <p>Are you sure you want to delete the pulse <strong>"{{ pulse.title }}"</strong>?</p>
         </fieldset>
         <div class="form-group mt-4">
-            <button class="btn btn-outline-danger btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;" type="submit">Delete</button>
-            <a class="btn btn-outline-secondary btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;" href="{% url 'devpulse-detail' pulse.pk %}">Cancel</a>
+            <button class="btn btn-outline-danger btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;"
+                type="submit">Delete</button>
+            <a class="btn btn-outline-secondary btn-sm" style="padding: 0.15rem 0.4rem; font-size: 0.75rem;"
+                href="{% url 'devpulse-detail' pulse.pk %}">Cancel</a>
         </div>
     </form>
 </div>

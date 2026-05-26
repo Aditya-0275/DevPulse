@@ -1,5 +1,15 @@
-{% extends "DevQA/base.html" %}
+{% extends 'DevQA/base.html' %}
 {% block content %}
+<div class="content-section mb-4">
+    <div class="d-flex align-items-center">
+        <img class="rounded-circle account-img" style="width: 80px; height: 80px; object-fit: cover;"
+            src="{{ page_user.profile.image.url }}">
+        <div class="ms-3">
+            <h2 class="account-heading mb-0">{{ page_user.username }}</h2>
+            <p class="text-secondary mb-0">{{ page_obj.paginator.count }} Posts</p>
+        </div>
+    </div>
+</div>
 {% for pulse in pulses %}
 <article class="d-flex content-section">
     <img class="rounded-circle article-img" src="{{ pulse.user.profile.image.url }}">
@@ -78,4 +88,4 @@
     </ul>
 </nav>
 {% endif %}
-{% endblock content%}
+{% endblock %}

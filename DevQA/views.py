@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -9,12 +9,10 @@ from django.views.generic import (
     DeleteView
 )
 from django.urls import reverse
-from .models import Pulse
-
+from .models import Pulse, User
 
 @login_required
 def home(request):
-
     context = {
         'pulses': Pulse.objects.all()
     }
@@ -22,17 +20,38 @@ def home(request):
 
 from django.db.models import Q
 
-class PulseListView(ListView):
+class PulseListView(LoginRequiredMixin, ListView):
     model = Pulse
     template_name = 'DevQA/home.html'
     context_object_name = 'pulses'
     ordering = ['-created_at']
+    paginate_by = 4
 
     def get_queryset(self):
         qs = super().get_queryset()
         if self.request.user.is_authenticated:
             return qs.filter(Q(isPrivate=False) | Q(user=self.request.user))
         return qs.filter(isPrivate=False)
+
+class UserPulseListView(ListView):
+    model = Pulse
+    template_name = 'DevQA/user_pulse.html'
+    context_object_name = 'pulses'
+    ordering = ['-created_at']
+    paginate_by = 4
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        qs = Pulse.objects.filter(user=user).order_by('-created_at')
+        if self.request.user.is_authenticated and self.request.user == user:
+            return qs
+        return qs.filter(isPrivate=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_user'] = get_object_or_404(User, username=self.kwargs.get('username'))
+        return context
+
 
 class PulseDetailView(DetailView):
     model = Pulse
