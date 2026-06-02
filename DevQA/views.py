@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -81,6 +82,7 @@ class PulseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        messages.success(self.request, 'Your pulse has been updated!')
         return super().form_valid(form)
 
     def test_func(self):
@@ -93,6 +95,10 @@ class PulseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Pulse
     success_url = '/'
     template_name = 'DevQA/pulse_confirm_delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, 'Your pulse has been deleted!')
+        return super().delete(request, *args, **kwargs)
 
     def test_func(self):
         pulse = self.get_object()
